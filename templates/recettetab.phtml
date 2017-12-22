@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">  
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script> 
+        <link rel="stylesheet" href="style.css">
+        <title>Table des recettes</title>
+    </head>
+
+    <body>
+         <header class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills  justify-content-center bg-dark">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../public/">Accueil <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../public/showall">Recettes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../templates/ajouter.phtml"> Ajouter</a>
+                    </li>
+
+                </ul>
+            </nav>
+        </header>
+        <h1>Voici le tableau des recettes</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="bordure" scope="col">Prenom</th>
+                <th class="bordure" scope="col">Nom</th>
+                <th class="bordure" scope="col">E-mail</th>
+                <th class="bordure" scope="col">Titre</th>
+            </tr>
+        </thead>
+        <?php
+        foreach($plats as $a)
+        {   
+            ?>
+                <tr>
+                    <td class="bordure" ><?php echo $a->prenom; ?></td>
+                    <td class="bordure" ><?php echo $a->nom; ?></td>
+                    <td class="bordure"><?php echo $a->email; ?></td>
+                    <td class="bordure"><?php echo $a->titre; ?></td>
+                    <td><form method="post" action="../public/amodifier">
+                        <input type="hidden" name="id" id="id" value=<?php echo $a->id ?> readonly="readonly">
+                        <p><input type="submit" class="btn btn-primary" value="Modifier"></p>
+                    </form></td>
+                    <td><form method="post" action="../public/supprimer">
+                        <input type="hidden" name="id" id="id" value=<?php echo $a->id ?> readonly="readonly">
+                        <p><input type="submit" class="btn btn-primary" value="Supprimer"></p>
+                    </form></td>
+                    <td><form method="post" action="../public/showone">
+                        <input type="hidden" name="id" id="id" value=<?php echo $a->id ?> readonly="readonly">
+                        <p><input type="submit" class="btn btn-primary" value="Observer seul"></p>
+                    </form></td>
+                </tr>
+            <?php
+        }
+
+        ?>
+    </table>
+       
+    </body>
+</html>
+    
